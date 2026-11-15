@@ -1,3 +1,4 @@
+using Roomy.Localization;
 namespace Roomy.Core;
 
 public enum Safety { Safe, Review }
@@ -73,68 +74,68 @@ public static class Catalog
     {
         "recycle" => new CleanupCategory
         {
-            Id = id, Title = "Recycle Bin", Glyph = G.Delete,
-            Description = "Stuff you already deleted. It still takes up space until the bin is emptied.",
+            Id = id, Title = S.CatRecycle, Glyph = G.Delete,
+            Description = S.CatRecycleDesc,
             Action = CleanAction.EmptyRecycleBin, SelectedByDefault = true, ShowItems = false,
         },
         "temp" => new CleanupCategory
         {
-            Id = id, Title = "Temporary files", Glyph = G.Clock,
-            Description = "Leftovers apps create while they work and forget to clean up. Only files older than a day.",
+            Id = id, Title = S.CatTemp, Glyph = G.Clock,
+            Description = S.CatTempDesc,
             SelectedByDefault = true,
         },
         "browser" => new CleanupCategory
         {
-            Id = id, Title = "Browser cache", Glyph = G.Globe,
-            Description = "Saved copies of websites. You stay logged in. Sites may just load a little slower the first time.",
+            Id = id, Title = S.CatBrowser, Glyph = G.Globe,
+            Description = S.CatBrowserDesc,
             SelectedByDefault = true,
         },
         "apps" => new CleanupCategory
         {
-            Id = id, Title = "App caches", Glyph = G.Apps,
-            Description = "Cached data from Discord, VS Code, Slack and friends. They rebuild it on their own when needed.",
+            Id = id, Title = S.CatApps, Glyph = G.Apps,
+            Description = S.CatAppsDesc,
             SelectedByDefault = true,
         },
         "shaders" => new CleanupCategory
         {
-            Id = id, Title = "Graphics shader cache", Glyph = G.Color,
-            Description = "Game graphics your GPU pre-built. Safe to clear. Games rebuild it, but the next launch may stutter a bit.",
+            Id = id, Title = S.CatShaders, Glyph = G.Color,
+            Description = S.CatShadersDesc,
             SelectedByDefault = false,
         },
         "crash" => new CleanupCategory
         {
-            Id = id, Title = "Crash reports", Glyph = G.Bug,
-            Description = "Reports Windows saves whenever an app crashes. Only useful to developers.",
+            Id = id, Title = S.CatCrash, Glyph = G.Bug,
+            Description = S.CatCrashDesc,
             SelectedByDefault = true,
         },
         "windows" => new CleanupCategory
         {
-            Id = id, Title = "Windows Update leftovers", Glyph = G.Update,
-            Description = "Update files Windows already installed but keeps around just in case, plus Windows' own temp files.",
+            Id = id, Title = S.CatWindows, Glyph = G.Update,
+            Description = S.CatWindowsDesc,
             SelectedByDefault = true,
         },
         "installers" => new CleanupCategory
         {
-            Id = id, Title = "Old installers", Glyph = G.Package, Safety = Safety.Review,
-            Description = "Setup files in your Downloads you've most likely already run. Only ones older than a week.",
+            Id = id, Title = S.CatInstallers, Glyph = G.Package, Safety = Safety.Review,
+            Description = S.CatInstallersDesc,
         },
         "downloads" => new CleanupCategory
         {
-            Id = id, Title = "Big old downloads", Glyph = G.Download, Safety = Safety.Review,
-            Description = "Large files in your Downloads you haven't touched in over a month: old videos, ISOs, zips.",
+            Id = id, Title = S.CatDownloads, Glyph = G.Download, Safety = Safety.Review,
+            Description = S.CatDownloadsDesc,
         },
         "games" => new CleanupCategory
         {
-            Id = id, Title = "Games you haven't played", Glyph = G.Game, Safety = Safety.Review,
-            Description = "Steam games you haven't opened in 2+ months. Uninstall through Steam. You can always reinstall.",
+            Id = id, Title = S.CatGames, Glyph = G.Game, Safety = Safety.Review,
+            Description = S.CatGamesDesc,
             Action = CleanAction.SteamUninstall,
         },
         "winold" => new CleanupCategory
         {
-            Id = id, Title = "Previous Windows version", Glyph = G.History, Safety = Safety.Review,
-            Description = "A backup of your old Windows from the last big update. You only need it if you want to roll back.",
+            Id = id, Title = S.CatWinOld, Glyph = G.History, Safety = Safety.Review,
+            Description = S.CatWinOldDesc,
             Action = CleanAction.OpenSettings, ShowItems = false,
         },
-        _ => throw new ArgumentOutOfRangeException(nameof(id), id, "Unknown category"),
+        _ => throw new ArgumentOutOfRangeException(nameof(id), id, S.UnknownCategory),
     };
 }

@@ -2,6 +2,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Threading;
 using Roomy.Core;
 using Forms = System.Windows.Forms;
+using Roomy.Localization;
 
 namespace Roomy.Services;
 
@@ -51,8 +52,8 @@ public sealed class BackgroundMonitor : IDisposable
                 var drive = new DriveInfo(Env.SystemRoot);
                 if (drive.IsReady && ReminderPolicy.IsLowSpace(p, drive.AvailableFreeSpace))
                 {
-                    Notify($"Your {drive.Name.TrimEnd('\\')} drive is getting full",
-                        $"{Format.Bytes(drive.AvailableFreeSpace)} remaining. Open Roomy to see what you can clear.", "low-space");
+                    Notify(Loc.Format("LowSpaceTitle", drive.Name.TrimEnd('\\')),
+                        Loc.Format("LowSpaceBody", Format.Bytes(drive.AvailableFreeSpace)), "low-space");
                 }
             }
 
@@ -72,8 +73,8 @@ public sealed class BackgroundMonitor : IDisposable
                 if (!current.RunInBackground || !current.WeeklyChecks) return;
                 _save(current with { LastWeeklyCheck = DateTimeOffset.UtcNow });
                 if (bytes >= 1L << 30 && ReminderPolicy.CanNotify(_settings(), DateTimeOffset.UtcNow))
-                    Notify($"Roomy found {Format.Bytes(bytes)} of cleanup candidates",
-                        "Temporary files and app caches have built up. Review them when you're ready.", "weekly");
+                    Notify(Loc.Format("WeeklyTitle", Format.Bytes(bytes)),
+                        S.WeeklyBody, "weekly");
             }
             finally
             {
@@ -86,7 +87,7 @@ public sealed class BackgroundMonitor : IDisposable
         {
             // An unavailable drive or unwritable settings folder must not interrupt the desktop.
             _weeklyRetryAfter = now.AddMinutes(30);
-            System.Diagnostics.Trace.WriteLine("Roomy background check: " + ex.Message);
+            System.Diagnostics.Trace.WriteLine(S.BackgroundCheckFailed + ex.Message);
         }
         finally { _checking = false; }
     }

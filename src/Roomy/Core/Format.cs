@@ -1,3 +1,4 @@
+using Roomy.Localization;
 namespace Roomy.Core;
 
 public static class Format
@@ -17,12 +18,12 @@ public static class Format
     public static string Ago(DateTime when)
     {
         var d = DateTime.Now - when;
-        if (d.TotalDays < 1) return "today";
-        if (d.TotalDays < 2) return "yesterday";
-        if (d.TotalDays < 14) return $"{(int)d.TotalDays} days ago";
-        if (d.TotalDays < 60) return $"{(int)(d.TotalDays / 7)} weeks ago";
-        if (d.TotalDays < 365) return $"{(int)(d.TotalDays / 30)} months ago";
+        if (d.TotalDays < 1) return S.Today;
+        if (d.TotalDays < 2) return S.Yesterday;
+        if (d.TotalDays < 14) return Loc.Format("AgoDays", (int)d.TotalDays);
+        if (d.TotalDays < 60) return Loc.Format("AgoWeeks", (int)(d.TotalDays / 7));
+        if (d.TotalDays < 365) return Loc.Format("AgoMonths", (int)(d.TotalDays / 30));
         var y = (int)(d.TotalDays / 365);
-        return y == 1 ? "a year ago" : $"{y} years ago";
+        return y == 1 ? S.YearAgo : Loc.Format("AgoYears", y);
     }
 }

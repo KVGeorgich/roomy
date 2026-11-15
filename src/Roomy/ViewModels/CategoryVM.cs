@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media;
 using Roomy.Core;
+using Roomy.Localization;
 
 namespace Roomy.ViewModels;
 
@@ -29,7 +30,7 @@ public sealed class CategoryVM : ObservableObject
     public ObservableCollection<ItemVM> Items { get; } = [];
     public IEnumerable<ItemVM> VisibleItems => Items.Take(MaxVisible);
     public bool HasHidden => Items.Count > MaxVisible;
-    public string HiddenText => $"+ {Items.Count - MaxVisible} more (included when the box is ticked)";
+    public string HiddenText => Loc.Format("MoreItems", Items.Count - MaxVisible);
 
     public string Title => Model.Title;
     public string Description => Model.Description;
@@ -49,7 +50,7 @@ public sealed class CategoryVM : ObservableObject
 
     public long Size => Model.Size;
     public string SizeText => Model.Blocked ? "N/A" : Format.Bytes(Size);
-    public string SafetyText => Model.Blocked ? "NEEDS ADMIN" : IsSafe ? "SAFE" : "YOUR CALL";
+    public string SafetyText => Model.Blocked ? S.NeedsAdmin : IsSafe ? S.BadgeSafe : S.BadgeYourCall;
     public Brush BadgeBg => Res.Brush(Model.Blocked ? "MutedSoftBrush" : IsSafe ? "AccentSoftBrush" : "WarnSoftBrush");
     public Brush BadgeFg => Res.Brush(Model.Blocked ? "MutedBrush" : IsSafe ? "AccentBrush" : "WarnBrush");
     public Brush IconBrush => Res.Brush(Model.Blocked ? "MutedBrush" : IsSafe ? "AccentBrush" : "WarnBrush");
@@ -162,7 +163,7 @@ public sealed class ScanStepVM(string title) : ObservableObject
 
     public void Finish(CleanupCategory? c)
     {
-        SizeText = c is null ? "nothing" : c.Blocked ? "needs admin" : c.Size > 0 ? Format.Bytes(c.Size) : "nothing";
+        SizeText = c is null ? S.Nothing : c.Blocked ? S.NeedsAdminLower : c.Size > 0 ? Format.Bytes(c.Size) : S.Nothing;
         State = StepState.Done;
     }
 }

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Roomy.Localization;
 
 namespace Roomy.Core;
 
@@ -41,14 +42,14 @@ public static class Scanner
 
     public static readonly IReadOnlyList<ScanStep> Steps =
     [
-        new("recycle", "Recycle Bin", RecycleBin),
-        new("temp", "Temporary files", Temp),
-        new("browser", "Browser cache", Browsers),
-        new("apps", "App caches", Apps),
+        new("recycle", S.CatRecycle, RecycleBin),
+        new("temp", S.CatTemp, Temp),
+        new("browser", S.CatBrowser, Browsers),
+        new("apps", S.CatApps, Apps),
         new("shaders", "Shader cache", Shaders),
-        new("crash", "Crash reports", Crashes),
+        new("crash", S.CatCrash, Crashes),
         new("windows", "Windows Update", WindowsLeftovers),
-        new("installers", "Old installers", Installers),
+        new("installers", S.CatInstallers, Installers),
         new("downloads", "Big downloads", BigDownloads),
         new("games", "Unplayed games", Games),
         new("winold", "Old Windows", WindowsOld),
@@ -72,7 +73,7 @@ public static class Scanner
         return new CleanupItem
         {
             Name = name, Paths = existing, Size = size, FileCount = files, MinAge = minAge,
-            Detail = $"{files:N0} file{(files == 1 ? "" : "s")}",
+            Detail = $"{files:N0} {Loc.Files(files)}",
         };
     }
 
@@ -112,10 +113,10 @@ public static class Scanner
     static string? RunningNote(List<string> names)
     {
         if (names.Count == 0) return null;
-        var who = names.Count == 1 ? names[0] : string.Join(", ", names.Take(names.Count - 1)) + " and " + names[^1];
-        var verb = names.Count == 1 ? "is" : "are";
-        var them = names.Count == 1 ? "it" : "them";
-        return $"{who} {verb} open, so some files are locked. Close {them} first to clean everything.";
+        var who = names.Count == 1
+            ? names[0]
+            : string.Join(", ", names.Take(names.Count - 1)) + " " + S.AndWord + " " + names[^1];
+        return Loc.Format("RunningNote", who);
     }
 
     static DateTime Touched(FileInfo f) => f.CreationTime > f.LastWriteTime ? f.CreationTime : f.LastWriteTime;
@@ -129,8 +130,8 @@ public static class Scanner
         if (size > 0)
             cat.Items.Add(new CleanupItem
             {
-                Name = "Recycle Bin", Paths = ["shell:RecycleBinFolder"], Size = size,
-                Detail = $"{count:N0} item{(count == 1 ? "" : "s")}",
+                Name = S.CatRecycle, Paths = ["shell:RecycleBinFolder"], Size = size,
+                Detail = $"{count:N0} {Loc.Items(count)}",
             });
         return cat;
     }
@@ -138,7 +139,7 @@ public static class Scanner
     static CleanupCategory Temp(ScanContext c)
     {
         var cat = Catalog.Create("temp");
-        Add(cat, Item("Your temp folder", OneDay, c.Token, [Env.Temp]));
+        Add(cat, Item(S.ItemTempFolder, OneDay, c.Token, [Env.Temp]));
         return cat;
     }
 
@@ -173,13 +174,13 @@ public static class Scanner
     {
         var cat = Catalog.Create("browser");
         foreach (var (name, ud) in Chromium) Add(cat, Item(name, null, c.Token, ChromiumCaches(ud)));
-        Add(cat, Item("Firefox", null, c.Token,
-            Subdirs(Env.L("Mozilla", "Firefox", "Profiles")).Select(p => Path.Combine(p, "cache2"))));
-        Add(cat, Item("Opera", null, c.Token,
+        Add(cat, Item(S.ItemFirefox, null, c.Token,
+            Subdirs(Env.L("Mozilla", S.ItemFirefox, "Profiles")).Select(p => Path.Combine(p, "cache2"))));
+        Add(cat, Item(S.ItemOpera, null, c.Token,
             [Env.L("Opera Software", "Opera Stable", "Cache"), Env.L("Opera Software", "Opera GX Stable", "Cache")]));
         if (cat.Items.Count > 0)
-            cat.Note = RunningNote(Running(("chrome", "Chrome"), ("msedge", "Edge"), ("firefox", "Firefox"),
-                ("brave", "Brave"), ("opera", "Opera"), ("vivaldi", "Vivaldi")));
+            cat.Note = RunningNote(Running(("chrome", "Chrome"), ("msedge", "Edge"), ("firefox", S.ItemFirefox),
+                ("brave", "Brave"), ("opera", S.ItemOpera), ("vivaldi", "Vivaldi")));
         return Sorted(cat);
     }
 
@@ -189,32 +190,32 @@ public static class Scanner
         string[] bits = ["Cache", "Code Cache", "GPUCache"];
         IEnumerable<string> Bits(string root) => bits.Select(b => Path.Combine(root, b));
 
-        Add(cat, Item("Discord", null, c.Token,
+        Add(cat, Item(S.ItemDiscord, null, c.Token,
             new[] { "discord", "discordptb", "discordcanary" }.SelectMany(d => Bits(Env.R(d)))));
-        Add(cat, Item("Slack", null, c.Token, Bits(Env.R("Slack"))));
-        Add(cat, Item("Microsoft Teams (classic)", null, c.Token, Bits(Env.R("Microsoft", "Teams"))));
-        Add(cat, Item("VS Code", null, c.Token,
+        Add(cat, Item(S.ItemSlack, null, c.Token, Bits(Env.R(S.ItemSlack))));
+        Add(cat, Item(S.ItemTeamsClassic, null, c.Token, Bits(Env.R("Microsoft", "Teams"))));
+        Add(cat, Item(S.ItemVsCode, null, c.Token,
             Bits(Env.R("Code")).Append(Env.R("Code", "CachedData")).Append(Env.R("Code", "CachedExtensionVSIXs"))));
-        Add(cat, Item("Steam's web browser", null, c.Token, [Env.L("Steam", "htmlcache")]));
-        Add(cat, Item("npm cache", null, c.Token, [Env.L("npm-cache", "_cacache")]));
-        Add(cat, Item("pip cache", null, c.Token, [Env.L("pip", "Cache")]));
-        Add(cat, Item("Yarn cache", null, c.Token, [Env.L("Yarn", "Cache")]));
-        Add(cat, Item("NuGet web cache", null, c.Token, [Env.L("NuGet", "v3-cache")]));
+        Add(cat, Item(S.ItemSteamBrowser, null, c.Token, [Env.L("Steam", "htmlcache")]));
+        Add(cat, Item(S.ItemNpm, null, c.Token, [Env.L("npm-cache", "_cacache")]));
+        Add(cat, Item(S.ItemPip, null, c.Token, [Env.L("pip", "Cache")]));
+        Add(cat, Item(S.ItemYarn, null, c.Token, [Env.L("Yarn", "Cache")]));
+        Add(cat, Item(S.ItemNuget, null, c.Token, [Env.L("NuGet", "v3-cache")]));
         if (cat.Items.Count > 0)
-            cat.Note = RunningNote(Running(("Discord", "Discord"), ("slack", "Slack"), ("Code", "VS Code"), ("Teams", "Teams")));
+            cat.Note = RunningNote(Running((S.ItemDiscord, S.ItemDiscord), ("slack", S.ItemSlack), ("Code", S.ItemVsCode), ("Teams", "Teams")));
         return Sorted(cat);
     }
 
     static CleanupCategory Shaders(ScanContext c)
     {
         var cat = Catalog.Create("shaders");
-        Add(cat, Item("DirectX", null, c.Token, [Env.L("D3DSCache")]));
-        Add(cat, Item("NVIDIA", null, c.Token,
-            [Env.L("NVIDIA", "DXCache"), Env.L("NVIDIA", "GLCache"), Env.L("NVIDIA Corporation", "NV_Cache"), Env.PD("NVIDIA Corporation", "NV_Cache")]));
+        Add(cat, Item(S.ItemDirectX, null, c.Token, [Env.L("D3DSCache")]));
+        Add(cat, Item(S.ItemNvidia, null, c.Token,
+            [Env.L(S.ItemNvidia, "DXCache"), Env.L(S.ItemNvidia, "GLCache"), Env.L("NVIDIA Corporation", "NV_Cache"), Env.PD("NVIDIA Corporation", "NV_Cache")]));
         Add(cat, Item("AMD", null, c.Token,
             [Env.L("AMD", "DxCache"), Env.L("AMD", "DxcCache"), Env.L("AMD", "GLCache"), Env.L("AMD", "VkCache")]));
         Add(cat, Item("Intel", null, c.Token, [Env.L("Intel", "ShaderCache")]));
-        Add(cat, Item("Steam games", null, c.Token,
+        Add(cat, Item(S.ItemSteamGames, null, c.Token,
             Steam.Libraries().Select(l => Path.Combine(l, "steamapps", "shadercache"))));
         return Sorted(cat);
     }
@@ -222,8 +223,8 @@ public static class Scanner
     static CleanupCategory Crashes(ScanContext c)
     {
         var cat = Catalog.Create("crash");
-        Add(cat, Item("App crash dumps", null, c.Token, [Env.L("CrashDumps")]));
-        Add(cat, Item("Windows error reports", null, c.Token, [Env.L("Microsoft", "Windows", "WER")]));
+        Add(cat, Item(S.ItemAppCrashDumps, null, c.Token, [Env.L("CrashDumps")]));
+        Add(cat, Item(S.ItemWindowsErrorReports, null, c.Token, [Env.L("Microsoft", "Windows", "WER")]));
         return Sorted(cat);
     }
 
@@ -233,14 +234,14 @@ public static class Scanner
         if (!c.IsAdmin)
         {
             cat.Blocked = true;
-            cat.Note = "Windows locks these. Restart Roomy as admin to check them.";
+            cat.Note = S.WindowsLocksNote;
             return cat;
         }
-        Add(cat, Item("Downloaded updates", null, c.Token, [Env.W("SoftwareDistribution", "Download")]));
-        Add(cat, Item("Delivery Optimization", null, c.Token,
+        Add(cat, Item(S.ItemDownloadedUpdates, null, c.Token, [Env.W("SoftwareDistribution", "Download")]));
+        Add(cat, Item(S.ItemDeliveryOptimization, null, c.Token,
             [Env.W("ServiceProfiles", "NetworkService", "AppData", "Local", "Microsoft", "Windows", "DeliveryOptimization", "Cache")]));
-        Add(cat, Item("Windows temp folder", OneDay, c.Token, [Env.W("Temp")]));
-        Add(cat, Item("System crash dumps", null, c.Token,
+        Add(cat, Item(S.ItemWindowsTemp, OneDay, c.Token, [Env.W("Temp")]));
+        Add(cat, Item(S.ItemSystemCrashDumps, null, c.Token,
             [Env.W("Minidump"), Env.W("MEMORY.DMP"), Env.PD("Microsoft", "Windows", "WER", "ReportArchive"), Env.PD("Microsoft", "Windows", "WER", "ReportQueue")]));
         return Sorted(cat);
     }
@@ -262,7 +263,7 @@ public static class Scanner
                 cat.Items.Add(new CleanupItem
                 {
                     Name = f.Name, Paths = [f.FullName], Size = f.Length, FileCount = 1, IsFile = true,
-                    Detail = $"Downloaded {Format.Ago(t)}",
+                    Detail = Loc.Format("DownloadedAgo", Format.Ago(t)),
                 });
             }
             catch { }
@@ -286,7 +287,7 @@ public static class Scanner
                 cat.Items.Add(new CleanupItem
                 {
                     Name = f.Name, Paths = [f.FullName], Size = f.Length, FileCount = 1, IsFile = true,
-                    Detail = $"Untouched for {Format.Ago(t).Replace(" ago", "")}",
+                    Detail = Loc.Format("UntouchedFor", Format.Ago(t)),
                 });
             }
             catch { }
@@ -305,7 +306,7 @@ public static class Scanner
             cat.Items.Add(new CleanupItem
             {
                 Name = g.Name, Paths = [g.InstallPath], Size = g.Size, AppId = g.AppId,
-                Detail = g.LastPlayed is { } p ? $"Last played {Format.Ago(p)}" : "Never played",
+                Detail = g.LastPlayed is { } p ? Loc.Format("LastPlayed", Format.Ago(p)) : S.NeverPlayed,
             });
         }
         return Sorted(cat);

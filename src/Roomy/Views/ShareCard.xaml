@@ -1,4 +1,4 @@
-<UserControl x:Class="Roomy.Views.ShareCard"
+<UserControl xmlns:loc="clr-namespace:Roomy.Localization" x:Class="Roomy.Views.ShareCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:c="clr-namespace:Roomy.Controls"
@@ -25,7 +25,7 @@
                     <ColumnDefinition Width="380" />
                 </Grid.ColumnDefinitions>
                 <StackPanel VerticalAlignment="Center">
-                    <TextBlock Text="I just freed" FontSize="40" Foreground="{StaticResource MutedBrush}" />
+                    <TextBlock Text="{x:Static loc:S.IJustFreed}" FontSize="40" Foreground="{StaticResource MutedBrush}" />
                     <TextBlock Text="{Binding FreedText}" FontSize="148" FontWeight="Bold" Margin="-6,-14,0,-14"
                                Foreground="{StaticResource AccentBrush}" />
                     <TextBlock Text="{Binding Subtitle}" FontSize="32" Foreground="{StaticResource MutedBrush}" />
@@ -34,13 +34,13 @@
                         Background="{StaticResource SurfaceBrush}" BorderBrush="{StaticResource LineBrush}" BorderThickness="1.5">
                     <StackPanel>
                         <Grid>
-                            <TextBlock Text="Before" FontSize="18" Foreground="{StaticResource MutedBrush}" />
+                            <TextBlock Text="{x:Static loc:S.Before}" FontSize="18" Foreground="{StaticResource MutedBrush}" />
                             <TextBlock Text="{Binding BeforeText}" FontSize="18" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" />
                         </Grid>
                         <c:UsageBar Height="16" Margin="0,12,0,26" Target="{Binding Before}" Fill="{Binding BeforeBrush}"
                                     Track="{StaticResource Surface2Brush}" />
                         <Grid>
-                            <TextBlock Text="After" FontSize="18" Foreground="{StaticResource MutedBrush}" />
+                            <TextBlock Text="{x:Static loc:S.After}" FontSize="18" Foreground="{StaticResource MutedBrush}" />
                             <TextBlock Text="{Binding AfterText}" FontSize="18" Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Right" />
                         </Grid>
                         <c:UsageBar Height="16" Margin="0,12,0,0" Target="{Binding After}" Fill="{StaticResource AccentBrush}"
@@ -51,7 +51,7 @@
 
             <Grid Grid.Row="2">
                 <TextBlock Text="roomy.krezio.xyz" FontSize="26" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" />
-                <TextBlock Text="Free · No ads · No account" FontSize="24" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" />
+                <TextBlock Text="{x:Static loc:S.ShareTagline}" FontSize="24" Foreground="{StaticResource MutedBrush}" HorizontalAlignment="Right" />
             </Grid>
         </Grid>
     </Grid>

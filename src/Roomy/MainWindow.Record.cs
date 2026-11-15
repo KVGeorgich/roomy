@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using Roomy.ViewModels;
+using Roomy.Localization;
 
 namespace Roomy;
 
@@ -130,13 +131,13 @@ public partial class MainWindow
         await ClickAsync(Find<CheckBox>(c => c.DataContext is CategoryVM { Model.Id: "shaders" }));
         await Task.Delay(1300);
 
-        await ClickAsync(Find<RadioButton>(r => (r.Content as string) == "Space map"));
+        await ClickAsync(Find<RadioButton>(r => (r.Content as string) == S.TabSpaceMap));
         await WaitUntil(() => _vm.SpaceMap.HasData);
         await Task.Delay(1400);
         await ClickAsync(Find<Button>(b => b.DataContext is SpaceRowVM { Name: "Users" }), 0.18);
         await Task.Delay(1500);
 
-        await ClickAsync(Find<RadioButton>(r => (r.Content as string) == "Cleanup"));
+        await ClickAsync(Find<RadioButton>(r => (r.Content as string) == S.TabCleanup));
         await Task.Delay(900);
         await ClickAsync(Find<Button>(b => b.Command == _vm.CleanCommand));
 

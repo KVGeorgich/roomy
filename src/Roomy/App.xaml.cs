@@ -2,6 +2,7 @@ using System.Windows;
 using Roomy.ViewModels;
 using Roomy.Services;
 using Roomy.Core;
+using Roomy.Localization;
 
 namespace Roomy;
 
@@ -36,7 +37,7 @@ public partial class App : Application
 
         DispatcherUnhandledException += (_, ex) =>
         {
-            MessageBox.Show(ex.Exception.Message, "Roomy hit a snag", MessageBoxButton.OK, MessageBoxImage.Warning);
+            MessageBox.Show(ex.Exception.Message, S.SnagTitle, MessageBoxButton.OK, MessageBoxImage.Warning);
             ex.Handled = true;
         };
 
@@ -111,7 +112,7 @@ public partial class App : Application
                 else
                 {
                     var sent = await _instance.SendAsync(background ? "background" : args.Contains("--scan") ? "scan" : "open");
-                    if (!sent && !background) MessageBox.Show("Roomy is already opening. Try again in a moment.", "Roomy");
+                    if (!sent && !background) MessageBox.Show(S.AlreadyOpening, "Roomy");
                     Shutdown();
                 }
                 return;

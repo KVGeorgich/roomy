@@ -4,6 +4,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Roomy.Core;
+using Roomy.Localization;
 
 namespace Roomy.ViewModels;
 
@@ -52,7 +53,7 @@ public sealed class SpaceMapVM : ObservableObject
     }
 
     public bool ShowEmpty => !IsScanning && !HasData;
-    public string ScanButtonText => HasData ? "Rescan" : "Scan";
+    public string ScanButtonText => HasData ? S.Rescan : S.Scan;
 
     string _progress = "";
     public string ProgressText { get => _progress; private set => Set(ref _progress, value); }
@@ -85,7 +86,7 @@ public sealed class SpaceMapVM : ObservableObject
         Select(drive);
         IsScanning = true;
         HasData = false;
-        ProgressText = "Starting…";
+        ProgressText = S.Starting;
         try
         {
             IReadOnlyList<BigFile> big;
@@ -121,7 +122,7 @@ public sealed class SpaceMapVM : ObservableObject
         }
         catch (Exception ex)
         {
-            _main.ShowToast("Couldn't map that drive: " + ex.Message);
+            _main.ShowToast(S.CantMapDrive + ex.Message);
         }
         finally
         {
@@ -143,11 +144,11 @@ public sealed class SpaceMapVM : ObservableObject
         }
         if (node.FileBytes > 0)
         {
-            var label = atRoot ? "System files (pagefile, hibernation & co.)" : $"Files in this folder ({node.FileCount:N0})";
+            var label = atRoot ? S.SystemFiles : Loc.Format("FilesInFolder", node.FileCount.ToString("N0"));
             rows.Add(SpaceRowVM.Files(label, node.FileBytes, denominator, node.FullPath));
         }
         if (atRoot && _unseen > 1L << 30)
-            rows.Add(SpaceRowVM.Locked("Locked system files Roomy can't look inside", _unseen, denominator));
+            rows.Add(SpaceRowVM.Locked(S.LockedSystemFiles, _unseen, denominator));
 
         rows.Sort((a, b) => b.Size.CompareTo(a.Size));
         long max = rows.Count > 0 ? rows[0].Size : 1;

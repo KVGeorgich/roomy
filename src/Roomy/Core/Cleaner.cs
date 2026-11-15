@@ -1,3 +1,4 @@
+using Roomy.Localization;
 namespace Roomy.Core;
 
 public sealed record CleanJob(CleanupCategory Category, IReadOnlyList<CleanupItem> Items);
@@ -14,7 +15,7 @@ public static class Cleaner
 
         foreach (var job in jobs)
         {
-            var step = $"Cleaning {job.Category.Title.ToLowerInvariant()}…";
+            var step = Loc.Format("CleaningCategory", job.Category.Title.ToLowerInvariant());
             progress?.Report(((double)done / total, step));
 
             if (job.Category.Action == CleanAction.EmptyRecycleBin)
@@ -55,7 +56,7 @@ public static class Cleaner
             }
         }
 
-        progress?.Report((1, "All done"));
+        progress?.Report((1, S.AllDone));
         return new CleanResult(freed, skipped, files);
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.Toolkit.Uwp.Notifications;
 using Windows.UI.Notifications;
+using Roomy.Localization;
 
 namespace Roomy.Services;
 
@@ -22,7 +23,7 @@ public sealed class NotificationService : IDisposable
         }
         catch (Exception ex)
         {
-            Error = "Windows notifications aren't available: " + ex.Message;
+            Error = S.NotificationsUnavailable + ex.Message;
             Dispose();
             return false;
         }
@@ -58,7 +59,7 @@ public sealed class NotificationService : IDisposable
         }
         catch (Exception ex)
         {
-            Error = "Couldn't send a Windows notification: " + ex.Message;
+            Error = S.CantSendNotification + ex.Message;
             return false;
         }
     }
@@ -77,9 +78,9 @@ public sealed class NotificationService : IDisposable
         {
             Buttons =
             {
-                new ToastButton("Review", "scan"),
-                new ToastButton("Tomorrow", "snooze") { ActivationType = ToastActivationType.Background },
-                new ToastButton("Turn off", "disable") { ActivationType = ToastActivationType.Background },
+                new ToastButton(S.NotificationReview, "scan"),
+                new ToastButton(S.NotificationTomorrow, "snooze") { ActivationType = ToastActivationType.Background },
+                new ToastButton(S.NotificationTurnOff, "disable") { ActivationType = ToastActivationType.Background },
             },
         },
         Audio = new ToastAudio { Silent = true },
