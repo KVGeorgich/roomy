@@ -41,13 +41,13 @@
     <value>Открыть в Проводнике</value>
   </data>
   <data name="RestartAsAdmin" xml:space="preserve">
-    <value>Перезапустить от админа</value>
+    <value>Перезапустить от имени администратора</value>
   </data>
   <data name="RemoveWithWindows" xml:space="preserve">
     <value>Удалить средствами Windows</value>
   </data>
   <data name="StoragePath" xml:space="preserve">
-    <value>Параметры → Память → Временные файлы → Предыдущие установки Windows</value>
+    <value>Параметры → Система → Память → Временные файлы → Предыдущие установки Windows</value>
   </data>
   <data name="TooltipSettings" xml:space="preserve">
     <value>Настройки</value>
@@ -89,10 +89,10 @@
     <value>Карта места</value>
   </data>
   <data name="AdminLockTitle" xml:space="preserve">
-    <value>Windows держит самые крупные остатки под замком.</value>
+    <value>Windows не даёт очистить самые крупные остатки.</value>
   </data>
   <data name="AdminLockHint" xml:space="preserve">
-    <value>Перезапустите Roomy от админа, чтобы проверить и файлы Windows Update.</value>
+    <value>Перезапустите Roomy от имени администратора, чтобы проверить и файлы Windows Update.</value>
   </data>
   <data name="CleanAlreadyTitle" xml:space="preserve">
     <value>На ПК уже идеально чисто ✨</value>
@@ -125,7 +125,7 @@
     <value>Очищаем…</value>
   </data>
   <data name="InUseSkipped" xml:space="preserve">
-    <value>Занятые файлы пропускаются, никогда не удаляются силой.</value>
+    <value>Занятые файлы пропускаются и не удаляются принудительно.</value>
   </data>
   <data name="YouJustFreed" xml:space="preserve">
     <value>Вы освободили</value>
@@ -155,7 +155,7 @@
     <value>Оставлять Roomy в системном трее</value>
   </data>
   <data name="KeepInTrayHint" xml:space="preserve">
-    <value>При закрытии окна проверки продолжаются. Чтобы выйти, выберите «Выйти» в трее.</value>
+    <value>При закрытии окна проверки продолжаются. Чтобы выйти, используйте «Выйти» в трее.</value>
   </data>
   <data name="StartWithWindows" xml:space="preserve">
     <value>Запускать с Windows</value>
@@ -182,7 +182,7 @@
     <value>30 минут</value>
   </data>
   <data name="Minutes60" xml:space="preserve">
-    <value>60 minutes</value>
+    <value>60 минут</value>
   </data>
   <data name="WeeklyCacheCheck" xml:space="preserve">
     <value>Проверять накопление кэша раз в неделю</value>
@@ -218,7 +218,7 @@
     <value>Временные файлы</value>
   </data>
   <data name="CatTempDesc" xml:space="preserve">
-    <value>Мусор, который приложения создают в работе и забывают убрать. Только файлы старше суток.</value>
+    <value>Мусор, который приложения создают во время работы и забывают убрать. Только файлы старше суток.</value>
   </data>
   <data name="CatBrowser" xml:space="preserve">
     <value>Кэш браузеров</value>
@@ -278,7 +278,7 @@
     <value>Неизвестная категория</value>
   </data>
   <data name="ItemTempFolder" xml:space="preserve">
-    <value>Ваша папка temp</value>
+    <value>Временная папка</value>
   </data>
   <data name="ItemFirefox" xml:space="preserve">
     <value>Firefox</value>
@@ -335,13 +335,13 @@
     <value>Оптимизация доставки</value>
   </data>
   <data name="ItemWindowsTemp" xml:space="preserve">
-    <value>Папка temp Windows</value>
+    <value>Временная папка Windows</value>
   </data>
   <data name="ItemSystemCrashDumps" xml:space="preserve">
     <value>Системные дампы падений</value>
   </data>
   <data name="WindowsLocksNote" xml:space="preserve">
-    <value>Windows блокирует эти файлы. Перезапустите Roomy от админа, чтобы их проверить.</value>
+    <value>Windows блокирует эти файлы. Перезапустите Roomy от имени администратора, чтобы их проверить.</value>
   </data>
   <data name="RunningNote" xml:space="preserve">
     <value>Сейчас запущено: {0}. Часть файлов заблокирована — закройте, чтобы очистить всё.</value>
@@ -362,7 +362,7 @@
     <value>Очистить {0}</value>
   </data>
   <data name="PickSomething" xml:space="preserve">
-    <value>Выберите что очистить</value>
+    <value>Выберите, что очистить</value>
   </data>
   <data name="DeleteTheseForGood" xml:space="preserve">
     <value>Удалить это навсегда?</value>
@@ -389,7 +389,7 @@
     <value>Эта кнопка перезапускает Roomy с правами администратора.</value>
   </data>
   <data name="NoAdminWorries" xml:space="preserve">
-    <value>Не страшно — Roomy работает и без админа.</value>
+    <value>Не страшно — Roomy работает и без прав администратора.</value>
   </data>
   <data name="LocalDisk" xml:space="preserve">
     <value>Локальный диск</value>
@@ -509,7 +509,7 @@
     <value>Выключить</value>
   </data>
   <data name="WeeklyTitle" xml:space="preserve">
-    <value>Roomy нашёл {0} для очистки</value>
+    <value>Roomy нашёл {0} кандидатов на очистку</value>
   </data>
   <data name="WeeklyBody" xml:space="preserve">
     <value>Накопились временные файлы и кэши приложений. Проверьте их, когда удобно.</value>
@@ -554,7 +554,7 @@
     <value>и</value>
   </data>
   <data name="InUseSkippedMessage" xml:space="preserve">
-    <value>{0} было занято открытыми приложениями, поэтому мы его не трогали. Закройте их и просканируйте снова, чтобы освободить.</value>
+    <value>{0} было занято открытыми приложениями, поэтому мы его не трогали. Закройте их и запустите сканирование снова, чтобы освободить.</value>
   </data>
   <data name="FreeBytes" xml:space="preserve">
     <value>{0} свободно</value>
@@ -584,7 +584,7 @@
     <value>Скопировано! Вставьте в любом месте. Также сохранено в «Изображения\Roomy».</value>
   </data>
   <data name="AgoDays" xml:space="preserve">
-    <value>{0} дн. назад</value>
+    <value>{0} дней назад</value>
   </data>
   <data name="AgoWeeks" xml:space="preserve">
     <value>{0} нед. назад</value>
@@ -657,5 +657,11 @@
   </data>
   <data name="StepWinOld" xml:space="preserve">
     <value>Старая Windows</value>
+  </data>
+  <data name="AgoDaysOne" xml:space="preserve">
+    <value>{0} день назад</value>
+  </data>
+  <data name="AgoDaysFew" xml:space="preserve">
+    <value>{0} дня назад</value>
   </data>
 </root>

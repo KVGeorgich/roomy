@@ -63,7 +63,7 @@
     {
       "key": "RestartAsAdmin",
       "en": "Restart as admin",
-      "ru": "Перезапустить от админа"
+      "ru": "Перезапустить от имени администратора"
     },
     {
       "key": "RemoveWithWindows",
@@ -73,7 +73,7 @@
     {
       "key": "StoragePath",
       "en": "Settings → Storage → Temporary files → Previous Windows installation(s)",
-      "ru": "Параметры → Память → Временные файлы → Предыдущие установки Windows"
+      "ru": "Параметры → Система → Память → Временные файлы → Предыдущие установки Windows"
     },
     {
       "key": "TooltipSettings",
@@ -143,12 +143,12 @@
     {
       "key": "AdminLockTitle",
       "en": "Windows keeps some of the biggest leftovers locked.",
-      "ru": "Windows держит самые крупные остатки под замком."
+      "ru": "Windows не даёт очистить самые крупные остатки."
     },
     {
       "key": "AdminLockHint",
       "en": "Restart Roomy as admin to check Windows Update files too.",
-      "ru": "Перезапустите Roomy от админа, чтобы проверить и файлы Windows Update."
+      "ru": "Перезапустите Roomy от имени администратора, чтобы проверить и файлы Windows Update."
     },
     {
       "key": "CleanAlreadyTitle",
@@ -203,7 +203,7 @@
     {
       "key": "InUseSkipped",
       "en": "Files that are in use get skipped, never forced.",
-      "ru": "Занятые файлы пропускаются, никогда не удаляются силой."
+      "ru": "Занятые файлы пропускаются и не удаляются принудительно."
     },
     {
       "key": "YouJustFreed",
@@ -253,7 +253,7 @@
     {
       "key": "KeepInTrayHint",
       "en": "Closing the window keeps checks running. Use Quit Roomy in the tray to exit.",
-      "ru": "При закрытии окна проверки продолжаются. Чтобы выйти, выберите «Выйти» в трее."
+      "ru": "При закрытии окна проверки продолжаются. Чтобы выйти, используйте «Выйти» в трее."
     },
     {
       "key": "StartWithWindows",
@@ -298,7 +298,7 @@
     {
       "key": "Minutes60",
       "en": "60 minutes",
-      "ru": "60 minutes"
+      "ru": "60 минут"
     },
     {
       "key": "WeeklyCacheCheck",
@@ -358,7 +358,7 @@
     {
       "key": "CatTempDesc",
       "en": "Leftovers apps create while they work and forget to clean up. Only files older than a day.",
-      "ru": "Мусор, который приложения создают в работе и забывают убрать. Только файлы старше суток."
+      "ru": "Мусор, который приложения создают во время работы и забывают убрать. Только файлы старше суток."
     },
     {
       "key": "CatBrowser",
@@ -458,7 +458,7 @@
     {
       "key": "ItemTempFolder",
       "en": "Your temp folder",
-      "ru": "Ваша папка temp"
+      "ru": "Временная папка"
     },
     {
       "key": "ItemFirefox",
@@ -553,7 +553,7 @@
     {
       "key": "ItemWindowsTemp",
       "en": "Windows temp folder",
-      "ru": "Папка temp Windows"
+      "ru": "Временная папка Windows"
     },
     {
       "key": "ItemSystemCrashDumps",
@@ -563,7 +563,7 @@
     {
       "key": "WindowsLocksNote",
       "en": "Windows locks these. Restart Roomy as admin to check them.",
-      "ru": "Windows блокирует эти файлы. Перезапустите Roomy от админа, чтобы их проверить."
+      "ru": "Windows блокирует эти файлы. Перезапустите Roomy от имени администратора, чтобы их проверить."
     },
     {
       "key": "RunningNote",
@@ -598,7 +598,7 @@
     {
       "key": "PickSomething",
       "en": "Pick something to clean",
-      "ru": "Выберите что очистить"
+      "ru": "Выберите, что очистить"
     },
     {
       "key": "DeleteTheseForGood",
@@ -643,7 +643,7 @@
     {
       "key": "NoAdminWorries",
       "en": "No worries, Roomy keeps working without admin.",
-      "ru": "Не страшно — Roomy работает и без админа."
+      "ru": "Не страшно — Roomy работает и без прав администратора."
     },
     {
       "key": "LocalDisk",
@@ -843,7 +843,7 @@
     {
       "key": "WeeklyTitle",
       "en": "Roomy found {0} of cleanup candidates",
-      "ru": "Roomy нашёл {0} для очистки"
+      "ru": "Roomy нашёл {0} кандидатов на очистку"
     },
     {
       "key": "WeeklyBody",
@@ -918,7 +918,7 @@
     {
       "key": "InUseSkippedMessage",
       "en": "{0} was in use by open apps, so we left it alone. Close them and scan again to grab it.",
-      "ru": "{0} было занято открытыми приложениями, поэтому мы его не трогали. Закройте их и просканируйте снова, чтобы освободить."
+      "ru": "{0} было занято открытыми приложениями, поэтому мы его не трогали. Закройте их и запустите сканирование снова, чтобы освободить."
     },
     {
       "key": "FreeBytes",
@@ -968,7 +968,7 @@
     {
       "key": "AgoDays",
       "en": "{0} days ago",
-      "ru": "{0} дн. назад"
+      "ru": "{0} дней назад"
     },
     {
       "key": "AgoWeeks",
@@ -1089,6 +1089,16 @@
       "key": "StepWinOld",
       "en": "Old Windows",
       "ru": "Старая Windows"
+    },
+    {
+      "key": "AgoDaysOne",
+      "en": "{0} days ago",
+      "ru": "{0} день назад"
+    },
+    {
+      "key": "AgoDaysFew",
+      "en": "{0} days ago",
+      "ru": "{0} дня назад"
     }
   ]
 }

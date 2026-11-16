@@ -20,7 +20,11 @@ public static class Format
         var d = DateTime.Now - when;
         if (d.TotalDays < 1) return S.Today;
         if (d.TotalDays < 2) return S.Yesterday;
-        if (d.TotalDays < 14) return Loc.Format("AgoDays", (int)d.TotalDays);
+        if (d.TotalDays < 14)
+        {
+            var n = (int)d.TotalDays;
+            return string.Format(Loc.Plural(n, "AgoDaysOne", "AgoDaysFew", "AgoDays"), n);
+        }
         if (d.TotalDays < 60) return Loc.Format("AgoWeeks", (int)(d.TotalDays / 7));
         if (d.TotalDays < 365) return Loc.Format("AgoMonths", (int)(d.TotalDays / 30));
         var y = (int)(d.TotalDays / 365);

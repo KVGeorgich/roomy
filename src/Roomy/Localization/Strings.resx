@@ -658,4 +658,10 @@
   <data name="StepWinOld" xml:space="preserve">
     <value>Old Windows</value>
   </data>
+  <data name="AgoDaysOne" xml:space="preserve">
+    <value>{0} days ago</value>
+  </data>
+  <data name="AgoDaysFew" xml:space="preserve">
+    <value>{0} days ago</value>
+  </data>
 </root>

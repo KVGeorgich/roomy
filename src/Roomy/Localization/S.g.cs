@@ -660,4 +660,10 @@ public static class S
 
     /// <summary>Old Windows</summary>
     public static string StepWinOld => Loc.Get("StepWinOld");
+
+    /// <summary>{0} days ago</summary>
+    public static string AgoDaysOne => Loc.Get("AgoDaysOne");
+
+    /// <summary>{0} days ago</summary>
+    public static string AgoDaysFew => Loc.Get("AgoDaysFew");
 }
