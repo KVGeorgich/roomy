@@ -354,8 +354,8 @@
                                     </Grid.ColumnDefinitions>
                                     <TextBlock Text="&#xEA18;" Style="{StaticResource Icon}" FontSize="18" Foreground="{StaticResource WarnBrush}" />
                                     <StackPanel Grid.Column="1" Margin="14,0" VerticalAlignment="Center">
-                                        <TextBlock Text="{x:Static loc:S.AdminLockTitle}" FontWeight="SemiBold" />
-                                        <TextBlock Text="{x:Static loc:S.AdminLockHint}" FontSize="13"
+                                        <TextBlock Text="{x:Static loc:S.AdminLockTitle}" FontWeight="SemiBold" TextWrapping="Wrap" />
+                                        <TextBlock Text="{x:Static loc:S.AdminLockHint}" FontSize="13" TextWrapping="Wrap"
                                                    Foreground="{StaticResource MutedBrush}" Margin="0,2,0,0" />
                                     </StackPanel>
                                     <Button Grid.Column="2" Style="{StaticResource SecondaryButton}" Padding="14,8"
