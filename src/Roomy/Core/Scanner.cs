@@ -46,13 +46,13 @@ public static class Scanner
         new("temp", S.CatTemp, Temp),
         new("browser", S.CatBrowser, Browsers),
         new("apps", S.CatApps, Apps),
-        new("shaders", "Shader cache", Shaders),
+        new("shaders", S.StepShaders, Shaders),
         new("crash", S.CatCrash, Crashes),
-        new("windows", "Windows Update", WindowsLeftovers),
+        new("windows", S.StepWindows, WindowsLeftovers),
         new("installers", S.CatInstallers, Installers),
-        new("downloads", "Big downloads", BigDownloads),
-        new("games", "Unplayed games", Games),
-        new("winold", "Old Windows", WindowsOld),
+        new("downloads", S.StepDownloads, BigDownloads),
+        new("games", S.StepGames, Games),
+        new("winold", S.StepWinOld, WindowsOld),
     ];
 
     // ---------- helpers ----------

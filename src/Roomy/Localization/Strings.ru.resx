@@ -601,4 +601,61 @@
   <data name="PercentFull" xml:space="preserve">
     <value>заполнен на {0}%</value>
   </data>
+  <data name="TrayOpen" xml:space="preserve">
+    <value>Открыть Roomy</value>
+  </data>
+  <data name="TrayScanNow" xml:space="preserve">
+    <value>Сканировать сейчас</value>
+  </data>
+  <data name="TrayPauseReminders" xml:space="preserve">
+    <value>Приостановить напоминания до завтра</value>
+  </data>
+  <data name="TrayResumeReminders" xml:space="preserve">
+    <value>Возобновить напоминания</value>
+  </data>
+  <data name="TraySettings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="TrayQuit" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="DemoSettingsNote" xml:space="preserve">
+    <value>В демо-режиме настройки временные. Автозапуск и уведомления Windows отключены.</value>
+  </data>
+  <data name="OpenNormallyToChange" xml:space="preserve">
+    <value>Откройте Roomy в обычном режиме, чтобы изменить фоновые проверки и автозапуск.</value>
+  </data>
+  <data name="CantSaveReminders" xml:space="preserve">
+    <value>Не удалось сохранить настройки напоминаний: </value>
+  </data>
+  <data name="FinishBeforeClosing" xml:space="preserve">
+    <value>Дождитесь окончания очистки, прежде чем закрывать Roomy.</value>
+  </data>
+  <data name="FinishBeforeQuitting" xml:space="preserve">
+    <value>Дождитесь окончания очистки, прежде чем выходить из Roomy.</value>
+  </data>
+  <data name="StartupNeedsExe" xml:space="preserve">
+    <value>Запустите исполняемый файл Roomy, чтобы включить автозапуск.</value>
+  </data>
+  <data name="AgoYearsOne" xml:space="preserve">
+    <value>{0} год назад</value>
+  </data>
+  <data name="AgoYearsFew" xml:space="preserve">
+    <value>{0} года назад</value>
+  </data>
+  <data name="StepShaders" xml:space="preserve">
+    <value>Кэш шейдеров</value>
+  </data>
+  <data name="StepWindows" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="StepDownloads" xml:space="preserve">
+    <value>Крупные загрузки</value>
+  </data>
+  <data name="StepGames" xml:space="preserve">
+    <value>Неиспользуемые игры</value>
+  </data>
+  <data name="StepWinOld" xml:space="preserve">
+    <value>Старая Windows</value>
+  </data>
 </root>

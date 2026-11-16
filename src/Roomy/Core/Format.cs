@@ -24,6 +24,6 @@ public static class Format
         if (d.TotalDays < 60) return Loc.Format("AgoWeeks", (int)(d.TotalDays / 7));
         if (d.TotalDays < 365) return Loc.Format("AgoMonths", (int)(d.TotalDays / 30));
         var y = (int)(d.TotalDays / 365);
-        return y == 1 ? S.YearAgo : Loc.Format("AgoYears", y);
+        return y == 1 ? S.YearAgo : string.Format(Loc.Plural(y, "AgoYearsOne", "AgoYearsFew", "AgoYears"), y);
     }
 }

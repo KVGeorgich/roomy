@@ -994,6 +994,101 @@
       "key": "PercentFull",
       "en": "{0}% full",
       "ru": "заполнен на {0}%"
+    },
+    {
+      "key": "TrayOpen",
+      "en": "Open Roomy",
+      "ru": "Открыть Roomy"
+    },
+    {
+      "key": "TrayScanNow",
+      "en": "Scan now",
+      "ru": "Сканировать сейчас"
+    },
+    {
+      "key": "TrayPauseReminders",
+      "en": "Pause reminders until tomorrow",
+      "ru": "Приостановить напоминания до завтра"
+    },
+    {
+      "key": "TrayResumeReminders",
+      "en": "Resume reminders",
+      "ru": "Возобновить напоминания"
+    },
+    {
+      "key": "TraySettings",
+      "en": "Settings",
+      "ru": "Настройки"
+    },
+    {
+      "key": "TrayQuit",
+      "en": "Quit Roomy",
+      "ru": "Выйти"
+    },
+    {
+      "key": "DemoSettingsNote",
+      "en": "Demo settings are temporary. Startup and Windows notifications are disabled.",
+      "ru": "В демо-режиме настройки временные. Автозапуск и уведомления Windows отключены."
+    },
+    {
+      "key": "OpenNormallyToChange",
+      "en": "Open Roomy normally to change background and startup settings.",
+      "ru": "Откройте Roomy в обычном режиме, чтобы изменить фоновые проверки и автозапуск."
+    },
+    {
+      "key": "CantSaveReminders",
+      "en": "Couldn't save your reminder settings: ",
+      "ru": "Не удалось сохранить настройки напоминаний: "
+    },
+    {
+      "key": "FinishBeforeClosing",
+      "en": "Let the cleanup finish before closing Roomy.",
+      "ru": "Дождитесь окончания очистки, прежде чем закрывать Roomy."
+    },
+    {
+      "key": "FinishBeforeQuitting",
+      "en": "Let the cleanup finish before quitting Roomy.",
+      "ru": "Дождитесь окончания очистки, прежде чем выходить из Roomy."
+    },
+    {
+      "key": "StartupNeedsExe",
+      "en": "Run the Roomy executable to enable startup.",
+      "ru": "Запустите исполняемый файл Roomy, чтобы включить автозапуск."
+    },
+    {
+      "key": "AgoYearsOne",
+      "en": "{0} years ago",
+      "ru": "{0} год назад"
+    },
+    {
+      "key": "AgoYearsFew",
+      "en": "{0} years ago",
+      "ru": "{0} года назад"
+    },
+    {
+      "key": "StepShaders",
+      "en": "Shader cache",
+      "ru": "Кэш шейдеров"
+    },
+    {
+      "key": "StepWindows",
+      "en": "Windows Update",
+      "ru": "Windows Update"
+    },
+    {
+      "key": "StepDownloads",
+      "en": "Big downloads",
+      "ru": "Крупные загрузки"
+    },
+    {
+      "key": "StepGames",
+      "en": "Unplayed games",
+      "ru": "Неиспользуемые игры"
+    },
+    {
+      "key": "StepWinOld",
+      "en": "Old Windows",
+      "ru": "Старая Windows"
     }
   ]
 }

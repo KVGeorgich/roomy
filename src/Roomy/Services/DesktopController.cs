@@ -1,3 +1,4 @@
+using Roomy.Localization;
 using System.ComponentModel;
 using System.Windows;
 using Roomy.Core;
@@ -22,8 +23,8 @@ public sealed class DesktopController : IDisposable
     public Preferences Preferences { get; private set; }
     public bool IsDemo => _vm.IsDemo;
     public bool CanConfigure => IsDemo || !Admin.IsElevated;
-    public string? Status => IsDemo ? "Demo settings are temporary. Startup and Windows notifications are disabled." :
-        Admin.IsElevated ? "Open Roomy normally to change background and startup settings." : _store.LoadError ?? _notifications.Error;
+    public string? Status => IsDemo ? S.DemoSettingsNote :
+        Admin.IsElevated ? S.OpenNormallyToChange : _store.LoadError ?? _notifications.Error;
 
     public DesktopController(MainWindow window, MainVM vm, Action quit)
     {
@@ -78,14 +79,14 @@ public sealed class DesktopController : IDisposable
         using var stream = Application.GetResourceStream(new Uri("pack://application:,,,/Roomy;component/Assets/roomy.ico"))!.Stream;
         using var icon = new System.Drawing.Icon(stream);
         var menu = new Forms.ContextMenuStrip();
-        menu.Items.Add("Open Roomy", null, (_, _) => Open());
-        menu.Items.Add("Scan now", null, (_, _) => Handle("scan"));
+        menu.Items.Add(S.TrayOpen, null, (_, _) => Open());
+        menu.Items.Add(S.TrayScanNow, null, (_, _) => Handle("scan"));
         menu.Items.Add(new Forms.ToolStripSeparator());
-        var pause = menu.Items.Add("Pause reminders until tomorrow", null, (_, _) => Handle("snooze"));
-        menu.Items.Add("Resume reminders", null, (_, _) => Handle("resume"));
-        menu.Items.Add("Settings", null, (_, _) => OpenSettings());
+        var pause = menu.Items.Add(S.TrayPauseReminders, null, (_, _) => Handle("snooze"));
+        menu.Items.Add(S.TrayResumeReminders, null, (_, _) => Handle("resume"));
+        menu.Items.Add(S.TraySettings, null, (_, _) => OpenSettings());
         menu.Items.Add(new Forms.ToolStripSeparator());
-        var quit = menu.Items.Add("Quit Roomy", null, (_, _) => Quit());
+        var quit = menu.Items.Add(S.TrayQuit, null, (_, _) => Quit());
         menu.Opening += (_, _) =>
         {
             pause.Enabled = Preferences.LowSpaceAlerts || Preferences.WeeklyChecks;
@@ -137,7 +138,7 @@ public sealed class DesktopController : IDisposable
         catch (Exception ex) when (ex is IOException or UnauthorizedAccessException)
         {
             Open();
-            _vm.ShowToast("Couldn't save your reminder settings: " + ex.Message);
+            _vm.ShowToast(S.CantSaveReminders + ex.Message);
         }
     }
 
@@ -167,7 +168,7 @@ public sealed class DesktopController : IDisposable
         else if (_vm.State == AppState.Cleaning)
         {
             e.Cancel = true;
-            _vm.ShowToast("Let the cleanup finish before closing Roomy.");
+            _vm.ShowToast(S.FinishBeforeClosing);
         }
         else
         {
@@ -182,7 +183,7 @@ public sealed class DesktopController : IDisposable
         if (_vm.State == AppState.Cleaning)
         {
             Open();
-            _vm.ShowToast("Let the cleanup finish before quitting Roomy.");
+            _vm.ShowToast(S.FinishBeforeQuitting);
             return;
         }
         _quitting = true;

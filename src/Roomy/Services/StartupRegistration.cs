@@ -65,7 +65,7 @@ public static class StartupRegistration
         if (!Path.IsPathFullyQualified(exe) || exe.Contains('"') ||
             !string.Equals(Path.GetExtension(exe), ".exe", StringComparison.OrdinalIgnoreCase) ||
             string.Equals(Path.GetFileNameWithoutExtension(exe), "dotnet", StringComparison.OrdinalIgnoreCase))
-            throw new InvalidOperationException("Run the Roomy executable to enable startup.");
+            throw new InvalidOperationException(S.StartupNeedsExe);
         var command = $"\"{exe}\" --background";
         if (command.Length > 260) throw new InvalidOperationException(S.MoveToShorterPath);
         return command;

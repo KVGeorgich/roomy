@@ -601,4 +601,61 @@
   <data name="PercentFull" xml:space="preserve">
     <value>{0}% full</value>
   </data>
+  <data name="TrayOpen" xml:space="preserve">
+    <value>Open Roomy</value>
+  </data>
+  <data name="TrayScanNow" xml:space="preserve">
+    <value>Scan now</value>
+  </data>
+  <data name="TrayPauseReminders" xml:space="preserve">
+    <value>Pause reminders until tomorrow</value>
+  </data>
+  <data name="TrayResumeReminders" xml:space="preserve">
+    <value>Resume reminders</value>
+  </data>
+  <data name="TraySettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="TrayQuit" xml:space="preserve">
+    <value>Quit Roomy</value>
+  </data>
+  <data name="DemoSettingsNote" xml:space="preserve">
+    <value>Demo settings are temporary. Startup and Windows notifications are disabled.</value>
+  </data>
+  <data name="OpenNormallyToChange" xml:space="preserve">
+    <value>Open Roomy normally to change background and startup settings.</value>
+  </data>
+  <data name="CantSaveReminders" xml:space="preserve">
+    <value>Couldn't save your reminder settings: </value>
+  </data>
+  <data name="FinishBeforeClosing" xml:space="preserve">
+    <value>Let the cleanup finish before closing Roomy.</value>
+  </data>
+  <data name="FinishBeforeQuitting" xml:space="preserve">
+    <value>Let the cleanup finish before quitting Roomy.</value>
+  </data>
+  <data name="StartupNeedsExe" xml:space="preserve">
+    <value>Run the Roomy executable to enable startup.</value>
+  </data>
+  <data name="AgoYearsOne" xml:space="preserve">
+    <value>{0} years ago</value>
+  </data>
+  <data name="AgoYearsFew" xml:space="preserve">
+    <value>{0} years ago</value>
+  </data>
+  <data name="StepShaders" xml:space="preserve">
+    <value>Shader cache</value>
+  </data>
+  <data name="StepWindows" xml:space="preserve">
+    <value>Windows Update</value>
+  </data>
+  <data name="StepDownloads" xml:space="preserve">
+    <value>Big downloads</value>
+  </data>
+  <data name="StepGames" xml:space="preserve">
+    <value>Unplayed games</value>
+  </data>
+  <data name="StepWinOld" xml:space="preserve">
+    <value>Old Windows</value>
+  </data>
 </root>
