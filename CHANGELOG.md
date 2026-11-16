@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **More app caches.** Roomy now finds the Spotify, Epic Games Launcher and new Microsoft Teams caches. Spotify offline downloads are left alone.
+
 ## 0.1.2
 
 - **Settings window.** Choose whether Roomy starts with Windows and how it checks in the background.

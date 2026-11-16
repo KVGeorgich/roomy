@@ -102,7 +102,7 @@ public static class Scanner
             try
             {
                 var ps = Process.GetProcessesByName(proc);
-                if (ps.Length > 0) list.Add(name);
+                if (ps.Length > 0 && !list.Contains(name)) list.Add(name);
                 foreach (var p in ps) p.Dispose();
             }
             catch { }
@@ -175,7 +175,7 @@ public static class Scanner
         var cat = Catalog.Create("browser");
         foreach (var (name, ud) in Chromium) Add(cat, Item(name, null, c.Token, ChromiumCaches(ud)));
         Add(cat, Item(S.ItemFirefox, null, c.Token,
-            Subdirs(Env.L("Mozilla", S.ItemFirefox, "Profiles")).Select(p => Path.Combine(p, "cache2"))));
+            Subdirs(Env.L("Mozilla", "Firefox", "Profiles")).Select(p => Path.Combine(p, "cache2"))));
         Add(cat, Item(S.ItemOpera, null, c.Token,
             [Env.L("Opera Software", "Opera Stable", "Cache"), Env.L("Opera Software", "Opera GX Stable", "Cache")]));
         if (cat.Items.Count > 0)
@@ -192,8 +192,21 @@ public static class Scanner
 
         Add(cat, Item(S.ItemDiscord, null, c.Token,
             new[] { "discord", "discordptb", "discordcanary" }.SelectMany(d => Bits(Env.R(d)))));
-        Add(cat, Item(S.ItemSlack, null, c.Token, Bits(Env.R(S.ItemSlack))));
+        Add(cat, Item(S.ItemSlack, null, c.Token, Bits(Env.R("Slack"))));
         Add(cat, Item(S.ItemTeamsClassic, null, c.Token, Bits(Env.R("Microsoft", "Teams"))));
+        // New Teams keeps its web cache in WebView2 profiles; settings and sign-in live elsewhere.
+        Add(cat, Item("Microsoft Teams", null, c.Token,
+            Subdirs(Env.L("Packages", "MSTeams_8wekyb3d8bbwe", "LocalCache", "Microsoft", "MSTeams", "EBWebView"))
+                .Where(p => Path.GetFileName(p) is var n && (n == "Default" || n.StartsWith("WV2Profile", StringComparison.Ordinal)))
+                .SelectMany(Bits)));
+        // Spotify's streaming cache (Data) and its built-in browser cache. Offline downloads (Storage) are left alone.
+        Add(cat, Item("Spotify", null, c.Token,
+            Bits(Env.L("Spotify", "Browser"))
+                .Append(Env.L("Spotify", "Data"))
+                .Append(Env.L("Packages", "SpotifyAB.SpotifyMusic_zpdnekdrzrea0", "LocalCache", "Spotify", "Data"))));
+        Add(cat, Item("Epic Games Launcher", null, c.Token,
+            Subdirs(Env.L("EpicGamesLauncher", "Saved"))
+                .Where(p => Path.GetFileName(p).StartsWith("webcache", StringComparison.OrdinalIgnoreCase))));
         Add(cat, Item(S.ItemVsCode, null, c.Token,
             Bits(Env.R("Code")).Append(Env.R("Code", "CachedData")).Append(Env.R("Code", "CachedExtensionVSIXs"))));
         Add(cat, Item(S.ItemSteamBrowser, null, c.Token, [Env.L("Steam", "htmlcache")]));
@@ -202,7 +215,8 @@ public static class Scanner
         Add(cat, Item(S.ItemYarn, null, c.Token, [Env.L("Yarn", "Cache")]));
         Add(cat, Item(S.ItemNuget, null, c.Token, [Env.L("NuGet", "v3-cache")]));
         if (cat.Items.Count > 0)
-            cat.Note = RunningNote(Running((S.ItemDiscord, S.ItemDiscord), ("slack", S.ItemSlack), ("Code", S.ItemVsCode), ("Teams", "Teams")));
+            cat.Note = RunningNote(Running(("Discord", S.ItemDiscord), ("slack", S.ItemSlack), ("Code", S.ItemVsCode), ("Teams", "Teams"),
+                ("ms-teams", "Teams"), ("Spotify", "Spotify"), ("EpicGamesLauncher", "Epic Games Launcher")));
         return Sorted(cat);
     }
 
@@ -211,7 +225,7 @@ public static class Scanner
         var cat = Catalog.Create("shaders");
         Add(cat, Item(S.ItemDirectX, null, c.Token, [Env.L("D3DSCache")]));
         Add(cat, Item(S.ItemNvidia, null, c.Token,
-            [Env.L(S.ItemNvidia, "DXCache"), Env.L(S.ItemNvidia, "GLCache"), Env.L("NVIDIA Corporation", "NV_Cache"), Env.PD("NVIDIA Corporation", "NV_Cache")]));
+            [Env.L("NVIDIA", "DXCache"), Env.L("NVIDIA", "GLCache"), Env.L("NVIDIA Corporation", "NV_Cache"), Env.PD("NVIDIA Corporation", "NV_Cache")]));
         Add(cat, Item("AMD", null, c.Token,
             [Env.L("AMD", "DxCache"), Env.L("AMD", "DxcCache"), Env.L("AMD", "GLCache"), Env.L("AMD", "VkCache")]));
         Add(cat, Item("Intel", null, c.Token, [Env.L("Intel", "ShaderCache")]));

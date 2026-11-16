@@ -38,7 +38,7 @@ Most cleaners stick to temp files and the Recycle Bin, and Windows' own tools mi
 | | Category | Default |
 |---|---|---|
 | ♻️ | Windows Update leftovers, Delivery Optimization, Windows temp (needs admin) | ✅ Safe |
-| 🧩 | App caches: Discord, VS Code, Slack, Teams, Steam web, npm, pip, Yarn, NuGet | ✅ Safe |
+| 🧩 | App caches: Discord, Spotify, VS Code, Slack, Teams, Steam web, Epic Games Launcher, npm, pip, Yarn, NuGet | ✅ Safe |
 | 🌐 | Browser caches: Chrome, Edge, Brave, Vivaldi, Firefox, Opera | ✅ Safe |
 | 🕒 | Temp files (older than a day), crash dumps, error reports, Recycle Bin | ✅ Safe |
 | 🎨 | GPU shader caches (NVIDIA, AMD, Intel, DirectX, Steam) | Safe, unticked |
